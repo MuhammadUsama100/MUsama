@@ -7,6 +7,7 @@ import ResearchDomainCard from "@/components/ResearchDomainCard";
 import EventCalendar from "@/components/EventCalendar";
 import AnimatedBlocks from "@/components/AnimatedBlocks";
 import ResumePDF from '@/assets/MuhammadUsama2025.pdf';
+
 const About = () => {
   const researchDomains = [
     {
@@ -54,9 +55,17 @@ const About = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <section className="relative py-8 md:py-16 overflow-hidden">
-        <AnimatedBlocks />
+    // FIX 1: Apply w-full and overflow-x-hidden to the main container
+    <div className="min-h-screen bg-background w-full overflow-x-hidden">
+      
+      {/* Section 1 */}
+      <section className="relative py-8 md:py-16"> 
+        {/* FIX 2: Moved overflow-hidden to main div, ensuring the background animation doesn't cause global overflow */}
+        <div className="absolute inset-0 z-0">
+          <AnimatedBlocks />
+        </div>
+        
+        {/* Content container */}
         <div className="container max-w-5xl relative z-10 px-4">
           <div className="grid md:grid-cols-[2fr,1fr] gap-6 md:gap-8 items-start">
             {/* Left side - About content */}
@@ -119,8 +128,12 @@ const About = () => {
       </section>
 
       {/* Research Domains and Events Section */}
-      <section className="relative py-8 md:py-16 bg-muted/30 overflow-hidden">
-        <AnimatedBlocks />
+      <section className="relative py-8 md:py-16 bg-muted/30">
+        {/* FIX 2: Applied here as well */}
+        <div className="absolute inset-0 z-0">
+          <AnimatedBlocks />
+        </div>
+
         <div className="container max-w-6xl relative z-10 px-4">
           <div className="grid lg:grid-cols-[2fr,1fr] gap-6 md:gap-8">
             {/* Research Domains Grid */}

@@ -5,7 +5,10 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  publicPath: 'https://muhammadusama100.github.io/MUsama/',
+  base: 'https://muhammadusama100.github.io/MUsama/',
   server: {
+    
     host: "::",
     port: 8080,
   },

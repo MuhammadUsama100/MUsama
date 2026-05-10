@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 import covidTrackerImage from "@/assets/covid-tracker-app.png";
 import doublerocker from "@/assets/maxresdefault.png";
-
+import llmFinetuningImage from "@/assets/finetune.png"
 interface Project {
   title: string;
   role: string;
@@ -16,6 +16,7 @@ interface Project {
   tags: string[];
   image?: string;
   githubUrl?: string;
+  dataset?: string;
 }
 
 const projects: Project[] = [
@@ -41,6 +42,28 @@ const projects: Project[] = [
     image: covidTrackerImage,
     githubUrl: "https://github.com/MuhammadUsama100/Covid-19-Tracker",
   },
+  {
+  title: "Finetuning LLM for Code Generation",
+  role: "Solo Project",
+  period: "2023",
+  location: "Open-Source Research Project",
+  award: null,
+  description:
+    "Fine-tuned large language models for Python code generation with a focus on functional correctness and reasoning accuracy. Extended the MBPP benchmark by creating MBPP-Extended-3104, a significantly larger and more diverse dataset covering edge cases, algorithmic reasoning, and real-world programming patterns. Implemented data curation, prompt normalization, unit-test alignment, and evaluation pipelines to measure pass@k, execution accuracy, and generalization. The fine-tuned models demonstrate improved performance on code synthesis, bug fixing, and function-level reasoning tasks compared to baseline models.",
+  tags: [
+    "LLM Fine-Tuning",
+    "Code Generation",
+    "MBPP",
+    "Benchmarking",
+    "Python",
+    "Evaluation Metrics",
+    "Prompt Engineering",
+    "Machine Learning"
+  ],
+  image: llmFinetuningImage,
+  dataset: "https://huggingface.co/datasets/MUsama100/MBPP-Extended-3104",
+}
+
 
 ];
 
@@ -115,6 +138,18 @@ const Projects = () => {
                       >
                         <ExternalLink className="w-4 h-4" />
                         View on GitHub
+                      </Button>
+                    )}
+
+                    {project.dataset && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => window.open(project.dataset, '_blank')}
+                        className="gap-2"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        View Dataset
                       </Button>
                     )}
                   </div>
