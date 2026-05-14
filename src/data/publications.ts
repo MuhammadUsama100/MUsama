@@ -7,7 +7,7 @@ export interface Publication {
   authors: string;
   venue: string;
   year: number;
-  status?: "In Review" | "Published";
+  status?: "In Review" | "Published" | "Preprint" | "Accepted";
   contributions: string[];
   abstract?: string;
   methodology?: string;
@@ -20,7 +20,48 @@ export interface Publication {
   teaserImage?: string;
 }
 
-export const publications: Publication[] = [
+const publicationItems: Publication[] = [
+  {
+    id: "physics-in-the-loop",
+    title: "Physics-in-the-Loop: A Hybrid Agentic Architecture for Autonomous CAD Engineering Design",
+    authors: "Elias Berger, Muhammad Usama, Jan Mehlstäubl, Bernhard Saske, Kristin Paetzold-Byhain",
+    venue: "IJCAI 2026",
+    year: 2026,
+    status: "Accepted",
+    contributions: [
+      "Proposed a hybrid agentic-physical architecture that embeds validated engineering tools directly into autonomous CAD design loops.",
+      "Formulated generative CAD as a closed-loop Generate-Simulate-Refine process guided by explicit physical verification.",
+      "Introduced a benchmark dataset and functional metrics for evaluating load-bearing CAD generation beyond geometric similarity.",
+      "Improved generated design complexity by 4.2x while increasing compile rate by 3.5% compared with similar agentic methods."
+    ],
+    abstract: "Large Language Models can generate CAD code and parametric designs, but they do not inherently understand the physical constraints required for reliable engineering design. Physics-in-the-Loop proposes a hybrid agentic architecture that connects LLM/VLM agents with validated knowledge-based engineering tools, allowing generated CAD designs to be checked and revised using deterministic geometry and finite-element feedback.",
+    methodology: "The system is built as a multi-agent Generate-Simulate-Refine loop. A planner interprets structured load cases, a CAD engineer generates executable CadQuery code, a geometry reviewer checks design-space compliance and connectivity, and a structural reviewer runs physics-based FEA to evaluate safety factor, stress hotspots, and overbuilt designs. Feedback from these reviewers is routed back into the planning and CAD generation loop until the design satisfies deterministic geometric and physical checks.",
+    results: "The accepted IJCAI-ECAI 2026 AI4Tech paper shows that physics-based feedback substantially improves functional validity in generative CAD. The system generates more complex and physically verified engineering designs, achieving a 4.2x increase in structural complexity and a 3.5% compile-rate improvement compared with similar agentic methods. Ablations show that FEA feedback helps designs converge toward target safety factors, while planner and reviewer agents reduce iteration count and improve reliability.",
+    links: {},
+    teaserImage: "physics-in-loop-teaser"
+  },
+  {
+    id: "dreamcad",
+    title: "DreamCAD: Scaling Multi-modal CAD Generation using Differentiable Parametric Surfaces",
+    authors: "Muhammad Sadil Khan, Muhammad Usama, Rolandos Alexandros Potamias, Didier Stricker, Muhammad Zeshan Afzal, Jiankang Deng, Ismail Elezi",
+    venue: "arXiv 2026",
+    year: 2026,
+    status: "Preprint",
+    contributions: [
+      "Introduced DreamCAD, a multimodal framework for editable CAD generation from text, images, and point clouds.",
+      "Represented shapes as C0-continuous rational Bezier patches with differentiable tessellation for scalable point-level supervision.",
+      "Released CADCap-1M, a 1M+ caption dataset generated with GPT-5 for scalable text-to-CAD research.",
+      "Achieved state-of-the-art results across Text2CAD, Image2CAD, and Point2CAD tasks with over 75% user preference."
+    ],
+    abstract: "DreamCAD addresses the scalability challenge in multimodal CAD generation by moving away from small design-history datasets and non-differentiable BRep topology. It represents shapes as C0-continuous rational Bezier patches that can be differentiably tessellated, allowing training from large-scale unannotated 3D meshes using point-level supervision. The generated surfaces are exportable as STEP files and editable in standard CAD software.",
+    methodology: "DreamCAD uses a sparse voxel representation enriched with visual and geometric features to learn structured 3D latents. An initial parametric surface is created by removing internal voxel quads through flood fill and converting the exposed quads into bicubic rational Bezier patches. A parametric decoder then refines control points and weights while preserving shared boundaries for C0 continuity. Conditional generation follows a coarse-to-fine flow-matching pipeline for image and point inputs, while text-to-CAD uses a text-to-image stage followed by image-to-CAD generation.",
+    results: "DreamCAD achieves state-of-the-art performance across point-, image-, and text-conditioned CAD generation on ABC and Objaverse. It reduces Chamfer Distance by up to 70% in point-to-CAD, reaches zero invalidity ratio in reported settings, and surpasses 75% preference in expert and GPT-based evaluations for text and image-to-CAD. The work also demonstrates topology recovery from DreamCAD outputs, suggesting a path toward production-ready CAD generation.",
+    links: {
+      projectPage: "https://sadilkhan.github.io/dreamcad2026/",
+      paper: "https://arxiv.org/abs/2603.05607"
+    },
+    teaserImage: "dreamcad-teaser"
+  },
   {
     id: "nurbgen",
     title: "NURBGen: High-Fidelity Text-to-CAD Generation through LLM-Driven NURBS Modeling",
@@ -66,3 +107,30 @@ export const publications: Publication[] = [
     teaserImage: "marvel-teaser"
   }
 ];
+
+const getMuhammadUsamaAuthorPosition = (authors: string) => {
+  const authorList = authors.split(",").map((author) => author.trim());
+  const index = authorList.findIndex((author) => author.includes("Muhammad Usama"));
+  return index === -1 ? Number.MAX_SAFE_INTEGER : index;
+};
+
+export const publications: Publication[] = [...publicationItems].sort((a, b) => {
+  const priority: Record<string, number> = {
+    nurbgen: 0,
+    dreamcad: 1,
+  };
+
+  const priorityDiff = (priority[a.id] ?? 100) - (priority[b.id] ?? 100);
+
+  if (priorityDiff !== 0) {
+    return priorityDiff;
+  }
+
+  const authorPositionDiff = getMuhammadUsamaAuthorPosition(a.authors) - getMuhammadUsamaAuthorPosition(b.authors);
+
+  if (authorPositionDiff !== 0) {
+    return authorPositionDiff;
+  }
+
+  return b.year - a.year;
+});

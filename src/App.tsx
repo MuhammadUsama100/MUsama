@@ -12,6 +12,7 @@ import Projects from "./pages/Projects";
 import Experience from "./pages/Experience";
 import Blogs from "./pages/Blogs";
 import Education from "./pages/Education";
+import Collaborate from "./pages/Collaborate";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
@@ -24,18 +25,22 @@ const App = () => (
         <Toaster />
         <Sonner />
         <Navigation />
-        <Routes>
-          <Route path="/" element={<About />} />
-          <Route path="/publications" element={<Publications />} />
-          <Route path="/publications/:id" element={<PublicationDetail />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/experience" element={<Experience />} />
-          <Route path="/blogs" element={<Blogs />} />
-          <Route path="/education" element={<Education />} />
-          <Route path="/contact" element={<Contact />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <main>
+          <Routes>
+            <Route path="/" element={<About />} />
+            <Route path="/publications" element={<Publications />} />
+            <Route path="/publications/:id" element={<PublicationDetail />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/experience" element={<Experience />} />
+            <Route path="/collaborate" element={<Collaborate />} />
+            <Route path="/articles" element={<Blogs />} />
+            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/education" element={<Education />} />
+            <Route path="/contact" element={<Contact />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

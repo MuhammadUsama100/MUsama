@@ -8,35 +8,35 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 215 25% 27%;
+    --background: 210 33% 99%;
+    --foreground: 222 30% 14%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 27%;
+    --card-foreground: 222 30% 14%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 27%;
+    --popover-foreground: 222 30% 14%;
 
-    --primary: 215 28% 17%;
+    --primary: 222 38% 13%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 215 25% 27%;
+    --secondary: 210 30% 94%;
+    --secondary-foreground: 222 30% 18%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 210 30% 95%;
+    --muted-foreground: 215 16% 39%;
 
-    --accent: 195 85% 41%;
+    --accent: 190 82% 36%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
+    --border: 214 28% 88%;
+    --input: 214 28% 88%;
     --ring: 215 28% 17%;
 
-    --radius: 0.5rem;
+    --radius: 0.45rem;
 
     /* Academic theme colors */
     --academic-blue: 215 28% 17%;
@@ -53,17 +53,17 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222 47% 11%;
+    --background: 222 36% 8%;
     --foreground: 210 40% 98%;
 
-    --card: 222 47% 14%;
+    --card: 222 32% 11%;
     --card-foreground: 210 40% 98%;
 
     --popover: 222 47% 14%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 195 85% 55%;
-    --primary-foreground: 222 47% 11%;
+    --primary: 190 84% 58%;
+    --primary-foreground: 222 36% 8%;
 
     --secondary: 217 33% 17%;
     --secondary-foreground: 210 40% 98%;
@@ -71,8 +71,8 @@ All colors MUST be HSL.
     --muted: 217 33% 17%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 195 85% 55%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 190 84% 58%;
+    --accent-foreground: 222 36% 8%;
 
     --destructive: 0 62.8% 50.6%;
     --destructive-foreground: 210 40% 98%;
@@ -100,6 +100,11 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  ::selection {
+    @apply bg-accent/20 text-foreground;
   }
 }
 
@@ -126,31 +131,102 @@ All colors MUST be HSL.
   transform: rotateY(180deg);
 }
 
-/* Animated blocks */
-@keyframes float {
+/* CAD assembly hero animation */
+@keyframes cad-assembly-drift {
   0%, 100% {
-    transform: translateY(0px) translateX(0px);
-  }
-  25% {
-    transform: translateY(-20px) translateX(10px);
+    transform: translateY(0) rotate(0deg);
   }
   50% {
-    transform: translateY(-10px) translateX(-10px);
-  }
-  75% {
-    transform: translateY(-30px) translateX(5px);
+    transform: translateY(-10px) rotate(0.6deg);
   }
 }
 
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
+@keyframes cad-part-explode {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
   }
-  to {
-    transform: rotate(360deg);
+  42% {
+    transform: translate(var(--explode-x), var(--explode-y)) rotate(-2deg);
+  }
+  64% {
+    transform: translate(calc(var(--explode-x) * 0.55), calc(var(--explode-y) * 0.55)) rotate(1.2deg);
   }
 }
 
-.animate-float {
-  animation: float 20s ease-in-out infinite;
+@keyframes cad-impact-pulse {
+  0%, 100% {
+    transform: scale(0.55);
+    opacity: 0;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 0.42;
+  }
+  70% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+}
+
+.cad-exploded-part {
+  animation: cad-part-explode 9s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.cad-impact {
+  animation: cad-impact-pulse 9s ease-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+  fill: none;
+  stroke: hsl(var(--accent));
+  stroke-width: 1.4;
+}
+
+.cad-shape-fill {
+  fill: url("#cadSurface");
+  stroke: hsl(var(--accent));
+  stroke-width: 2;
+  filter: url("#cadGlow");
+}
+
+.cad-detail,
+.cad-connector {
+  fill: none;
+  stroke: hsl(var(--foreground));
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cad-detail {
+  stroke-width: 1.2;
+  stroke-opacity: 0.28;
+}
+
+.cad-connector {
+  stroke: hsl(var(--accent));
+  stroke-width: 1.2;
+  stroke-dasharray: 5 8;
+  stroke-opacity: 0.32;
+}
+
+.cad-hole {
+  fill: hsl(var(--background));
+  stroke: hsl(var(--accent));
+  stroke-width: 1.8;
+}
+
+.cad-detail-fill {
+  fill: hsl(var(--background) / 0.18);
+  stroke: hsl(var(--accent));
+  stroke-width: 1.2;
+  stroke-opacity: 0.75;
+}
+
+.academic-link {
+  @apply text-accent underline-offset-4 hover:underline;
+}
+
+.hairline-card {
+  @apply border border-border/80 bg-card/85 shadow-sm backdrop-blur;
 }

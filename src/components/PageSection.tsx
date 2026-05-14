@@ -10,11 +10,12 @@ interface PageSectionProps {
 
 const PageSection = ({ title, subtitle, children, className }: PageSectionProps) => {
   return (
-    <section className={cn("py-8 md:py-16", className)}>
-      <div className="container max-w-4xl px-4">
-        <div className="mb-8 md:mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-primary mb-2 md:mb-3">{title}</h1>
-          {subtitle && <p className="text-base md:text-lg text-muted-foreground">{subtitle}</p>}
+    <section className={cn("py-10 md:py-16", className)}>
+      <div className="container max-w-5xl px-4">
+        <div className="mb-8 border-b border-border/80 pb-6 md:mb-10">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-accent">Portfolio</p>
+          <h1 className="text-3xl font-semibold tracking-tight text-foreground md:text-5xl">{title}</h1>
+          {subtitle && <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">{subtitle}</p>}
         </div>
         {children}
       </div>

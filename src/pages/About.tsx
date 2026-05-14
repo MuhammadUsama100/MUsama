@@ -1,167 +1,221 @@
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { Download, GraduationCap } from "lucide-react";
+import { ArrowRight, Boxes, Cpu, Download, Github, GraduationCap, Linkedin, Mail, MapPin, Network } from "lucide-react";
 import profileImage from "@/assets/profile.jpeg";
-import ResearchDomainCard from "@/components/ResearchDomainCard";
-import EventCalendar from "@/components/EventCalendar";
 import AnimatedBlocks from "@/components/AnimatedBlocks";
-import ResumePDF from '@/assets/MuhammadUsama2025.pdf';
+import ResumePDF from "@/assets/MuhammadUsama2025.pdf";
+import { publications } from "@/data/publications";
 
 const About = () => {
-  const researchDomains = [
-    {
-      title: "3D Retrieval",
-      relatedWork: ["Upcoming Thesis (ECCV 2026 Target)"]
-    },
-    {
-      title: "AI CAD Generation",
-      relatedWork: ["NURBGen (AAAI 2026)"]
-    },
-    {
-      title: "3D Reconstruction",
-      relatedWork: ["MARVEL-40M+ (CVPR 2025)"]
-    },
-    {
-      title: "Image/Video Generation",
-      relatedWork: ["Upcoming"]
-    }
-  ];
+  const focusAreas = ["3D Retrieval", "Text-to-CAD", "3D Reconstruction", "Multimodal LLMs"];
 
-  const recentEvents = [
+  const researchProfile = [
     {
-      date: "08-11-2025",
-      title: "NURBGen accepted in AAAI 2026.",
-      description: "Details coming Soon."
+      icon: Boxes,
+      label: "Geometry",
+      value: "CAD, BRep, NURBS, Bezier surfaces"
     },
     {
-      date: "02-12-2025",
-      title: "Project Generative Design of a Double-Rocker Mechanism",
-      description: "Details coming Soon."
+      icon: Network,
+      label: "Learning",
+      value: "LLMs, VLMs, diffusion, multimodal retrieval"
     },
     {
-      date: "07-12-2025",
-      title: "NURBGen Project Page Launched.",
-      description: "https://muhammadusama100.github.io/NURBGen-Project/"
+      icon: Cpu,
+      label: "Systems",
+      value: "Distributed training, evaluation, CI/CD"
     },
   ];
 
   const handleDownloadResume = () => {
-    // Create a link to download resume
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = ResumePDF;
-    link.download = 'MuhammadUsama2025.pdf';
+    link.download = "MuhammadUsama2025.pdf";
     link.click();
   };
 
   return (
-    // FIX 1: Apply w-full and overflow-x-hidden to the main container
-    <div className="min-h-screen bg-background w-full overflow-x-hidden">
-      
-      {/* Section 1 */}
-      <section className="relative py-8 md:py-16"> 
-        {/* FIX 2: Moved overflow-hidden to main div, ensuring the background animation doesn't cause global overflow */}
-        <div className="absolute inset-0 z-0">
+    <div className="min-h-screen w-full overflow-x-hidden bg-background">
+      <section className="relative border-b border-border/80 py-12 md:py-20">
+        <div className="absolute inset-0 z-0 opacity-35">
           <AnimatedBlocks />
         </div>
-        
-        {/* Content container */}
-        <div className="container max-w-5xl relative z-10 px-4">
-          <div className="grid md:grid-cols-[2fr,1fr] gap-6 md:gap-8 items-start">
-            {/* Left side - About content */}
-            <div className="space-y-6 animate-fade-in">
+
+        <div className="container relative z-10 max-w-6xl px-4">
+          <div className="grid gap-10 lg:grid-cols-[1.35fr,0.65fr] lg:items-start">
+            <div className="animate-fade-in space-y-7">
               <div>
-                <h1 className="text-4xl font-bold text-primary mb-2">Muhammad Usama</h1>
-                <p className="text-xl text-muted-foreground mb-1">Research Assistant | Master's Student</p>
-                <p className="text-lg text-muted-foreground">Technische Universität Kaiserslautern-Landau (RPTU)</p>
+                <p className="mb-3 inline-flex items-center rounded-md border border-accent/25 bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+                  Master's Student · 3D Vision Researcher
+                </p>
+                <h1 className="max-w-4xl text-5xl font-semibold tracking-tight text-foreground md:text-7xl">
+                  Muhammad Usama
+                </h1>
+                <p className="mt-4 max-w-3xl text-xl leading-relaxed text-muted-foreground md:text-2xl">
+                  Building generative AI systems for CAD and 3D understanding.
+                </p>
               </div>
-            <div className="space-y-4 text-foreground">
-              <p className="leading-relaxed">
-                I am a Master's student in Computer Science at RPTU Kaiserslautern and a Research Assistant at the German Research Center for Artificial Intelligence (DFKI), driven by a focus on <strong>Generative AI</strong> and <strong>3D Computer Vision</strong>.
-              </p>
-              
-              <p className="leading-relaxed">
-                My 2 years of research centers on <strong>multimodal generation</strong> and <strong>3D retrieval/classification</strong>. My Master's thesis involves developing a <strong>multimodal 3D Retrieval Framework</strong> (targeting <strong>ECCV 2026</strong>), building on DFKI contributions in areas like <strong>LLM fine-tuning</strong> and diffusion models.
-              </p>
-              
-              <p className="leading-relaxed">
-                This research has resulted in publications at top-tier conferences, including <strong>AAAI</strong> and <strong>CVPR</strong>. Furthermore, my <strong>3 years of Software Engineering</strong> experience ensures I can deliver reliable, production-ready systems by managing <strong>distributed training</strong> and robust <strong>CI/CD pipelines</strong>.
-              </p>
-            </div>
 
-              <div className="space-y-4 mt-6 md:mt-8">
-                <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
-                  <Link to="/publications" className="w-full sm:w-auto">
-                    <Button variant="default" size="lg" className="w-full sm:w-auto">View Publications</Button>
-                  </Link>
-                  <Button variant="outline" size="lg" onClick={handleDownloadResume} className="w-full sm:w-auto">
-                    <Download className="mr-2 h-4 w-4" />
-                    Download Resume
+              <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
+                <span className="inline-flex items-center gap-2">
+                  <MapPin className="h-4 w-4 text-accent" />
+                  Kaiserslautern, Germany
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <GraduationCap className="h-4 w-4 text-accent" />
+                  RPTU · DFKI
+                </span>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {focusAreas.map((area) => (
+                  <Badge key={area} variant="secondary" className="rounded-md px-3 py-1">
+                    {area}
+                  </Badge>
+                ))}
+              </div>
+
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <Link to="/publications" className="w-full sm:w-auto">
+                  <Button size="lg" className="w-full sm:w-auto">
+                    View Research
+                    <ArrowRight className="h-4 w-4" />
                   </Button>
-                  <Link to="/contact" className="w-full sm:w-auto">
-                    <Button variant="outline" size="lg" className="w-full sm:w-auto">Get in Touch</Button>
-                  </Link>
-                </div>
-                <div>
-                  <a href="https://scholar.google.com/citations?user=zcRPmUoAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">
-                    <Button variant="secondary" size="lg" className="w-full sm:w-auto">
-                      <GraduationCap className="mr-2 h-5 w-5" />
-                      View Google Scholar Profile
-                    </Button>
-                  </a>
-                </div>
+                </Link>
+                <Button variant="outline" size="lg" onClick={handleDownloadResume} className="w-full sm:w-auto">
+                  <Download className="h-4 w-4" />
+                  Download CV
+                </Button>
+                <a href="mailto:usamamuhammad100@gmail.com" className="w-full sm:w-auto">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                    <Mail className="h-4 w-4" />
+                    Contact
+                  </Button>
+                </a>
+              </div>
+
+              <div className="flex flex-wrap gap-3 text-sm">
+                <a className="academic-link inline-flex items-center gap-1" href="https://scholar.google.com/citations?user=zcRPmUoAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">
+                  <GraduationCap className="h-4 w-4" /> Scholar
+                </a>
+                <a className="academic-link inline-flex items-center gap-1" href="https://github.com/MuhammadUsama100" target="_blank" rel="noopener noreferrer">
+                  <Github className="h-4 w-4" /> GitHub
+                </a>
+                <a className="academic-link inline-flex items-center gap-1" href="https://linkedin.com/in/muhammadusama100" target="_blank" rel="noopener noreferrer">
+                  <Linkedin className="h-4 w-4" /> LinkedIn
+                </a>
               </div>
             </div>
 
-            {/* Right side - Profile picture */}
-            <div className="flex justify-center md:justify-end animate-fade-in order-first md:order-last" style={{ animationDelay: "0.2s" }}>
-              <div className="bg-card rounded-xl shadow-lg p-3 md:p-4 hover-scale overflow-hidden border border-border w-full max-w-sm md:max-w-none">
-                <img 
-                  src={profileImage} 
-                  alt="Muhammad Usama" 
-                  className="w-full h-64 sm:h-72 md:h-80 object-cover rounded-lg"
+            <aside className="animate-fade-in lg:pt-2" style={{ animationDelay: "0.15s" }}>
+              <div className="overflow-hidden rounded-lg border border-border bg-card shadow-sm">
+                <img
+                  src={profileImage}
+                  alt="Muhammad Usama"
+                  className="aspect-[4/5] w-full object-cover"
                 />
+                <div className="border-t border-border p-5">
+                  <p className="text-sm font-medium text-foreground">Academic profile</p>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                    Master's student in Computer Science at RPTU Kaiserslautern-Landau, focused on generative AI and 3D computer vision.
+                  </p>
+                </div>
               </div>
-            </div>
+            </aside>
           </div>
         </div>
       </section>
 
-      {/* Research Domains and Events Section */}
-      <section className="relative py-8 md:py-16 bg-muted/30">
-        {/* FIX 2: Applied here as well */}
-        <div className="absolute inset-0 z-0">
-          <AnimatedBlocks />
-        </div>
-
-        <div className="container max-w-6xl relative z-10 px-4">
-          <div className="grid lg:grid-cols-[2fr,1fr] gap-6 md:gap-8">
-            {/* Research Domains Grid */}
-            <div className="animate-fade-in" style={{ animationDelay: "0.3s" }}>
-              <div className="mb-6 md:mb-8">
-                <h2 className="text-2xl md:text-3xl font-bold text-primary mb-2 md:mb-3">Research Domains</h2>
-                <p className="text-base md:text-lg text-muted-foreground">Hover over cards to see related work</p>
+      <section className="py-12 md:py-16">
+        <div className="container max-w-6xl px-4">
+          <div className="grid gap-10 lg:grid-cols-[1.35fr,0.65fr]">
+            <div>
+              <div className="mb-6 flex items-end justify-between gap-4 border-b border-border/80 pb-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Selected Work</p>
+                  <h2 className="mt-2 text-3xl font-semibold tracking-tight text-foreground">Recent Publications</h2>
+                </div>
+                <Link to="/publications" className="hidden text-sm font-medium text-accent hover:underline sm:inline-flex">
+                  All publications
+                </Link>
               </div>
-              <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
-                {researchDomains.map((domain, index) => (
-                  <div 
-                    key={index}
-                    className="animate-scale-in"
-                    style={{ animationDelay: `${0.4 + index * 0.1}s` }}
-                  >
-                    <ResearchDomainCard
-                      title={domain.title}
-                      relatedWork={domain.relatedWork}
-                    />
-                  </div>
+
+              <div className="space-y-4">
+                {publications.map((publication) => (
+                  <Card key={publication.id} className="hairline-card p-5 transition-colors hover:border-accent/50">
+                    <div className="grid gap-4 sm:grid-cols-[1fr,4.5rem]">
+                      <div>
+                        <div className="mb-2 flex flex-wrap items-center gap-2">
+                          <Badge variant="secondary">{publication.venue}</Badge>
+                          {publication.status && <Badge variant="outline">{publication.status}</Badge>}
+                        </div>
+                        <Link to={`/publications/${publication.id}`} className="group">
+                          <h3 className="text-xl font-semibold leading-snug text-foreground group-hover:text-accent">
+                            {publication.title}
+                          </h3>
+                        </Link>
+                        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{publication.authors}</p>
+                      </div>
+                      <div className="text-left text-sm font-semibold text-muted-foreground sm:text-right">
+                        {publication.year}
+                      </div>
+                    </div>
+                  </Card>
                 ))}
               </div>
             </div>
 
-            {/* Event Calendar */}
-            <div className="animate-fade-in" style={{ animationDelay: "0.5s" }}>
-              <EventCalendar events={recentEvents} />
+            <div className="space-y-6">
+              <Card className="hairline-card p-6">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Research Profile</p>
+                <h3 className="mt-3 text-2xl font-semibold tracking-tight text-foreground">
+                  Building reliable generative systems for 3D and CAD
+                </h3>
+                <div className="mt-5 space-y-4">
+                  {researchProfile.map((item) => (
+                    <div key={item.label} className="flex gap-3 rounded-md border border-border/80 bg-muted/30 p-3">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-accent/10">
+                        <item.icon className="h-5 w-5 text-accent" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-foreground">{item.label}</p>
+                        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{item.value}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-5 grid grid-cols-2 gap-3">
+                  <div className="rounded-md border border-border/80 bg-background/70 p-3">
+                    <p className="text-2xl font-semibold text-foreground">{publications.length}</p>
+                    <p className="mt-1 text-xs text-muted-foreground">Research papers</p>
+                  </div>
+                  <div className="rounded-md border border-border/80 bg-background/70 p-3">
+                    <p className="text-2xl font-semibold text-foreground">2</p>
+                    <p className="mt-1 text-xs text-muted-foreground">Primary domains</p>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="hairline-card p-6">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">About</p>
+                <div className="mt-4 space-y-4 text-sm leading-relaxed text-muted-foreground">
+                  <p>
+                    My research centers on multimodal generation and 3D retrieval/classification, with current thesis work targeting a multimodal 3D retrieval framework.
+                  </p>
+                  <p>
+                    I combine research practice with three years of software engineering experience across distributed training, CI/CD, infrastructure, and production systems.
+                  </p>
+                </div>
+              </Card>
             </div>
+          </div>
+
+          <div className="mt-8 sm:hidden">
+            <Link to="/publications">
+              <Button variant="outline" className="w-full">All publications</Button>
+            </Link>
           </div>
         </div>
       </section>

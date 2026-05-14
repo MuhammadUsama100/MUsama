@@ -8,6 +8,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { ArrowLeft, FileText, Globe, Code } from "lucide-react";
 import nurbgenArchitecture from "@/assets/nurbgen-architecture.png";
 import marvelTeaser from "@/assets/marvel-teaser.png";
+import dreamCadTeaser from "@/assets/DreamCad.png";
+import physicsInLoopTeaser from "@/assets/Physics_in_loop.png";
 
 const PublicationDetail = () => {
   const { id } = useParams();
@@ -18,7 +20,7 @@ const PublicationDetail = () => {
     return (
       <div className="min-h-screen bg-background">
         <PageSection title="Publication Not Found" subtitle="">
-          <Card className="p-8 text-center">
+          <Card className="hairline-card p-8 text-center">
             <p className="text-muted-foreground mb-4">
               The publication you're looking for doesn't exist.
             </p>
@@ -44,21 +46,21 @@ const PublicationDetail = () => {
           Back to Publications
         </Button>
 
-        <Card className="p-8">
+        <Card className="hairline-card p-5 md:p-8">
           <div className="mb-6">
             <div className="flex items-center gap-3 mb-4">
-              <Badge variant="secondary">{publication.venue}</Badge>
+                <Badge variant="secondary" className="rounded-md">{publication.venue}</Badge>
               {publication.status && (
-                <Badge variant={publication.status === "In Review" ? "outline" : "default"}>
+                <Badge className="rounded-md" variant={publication.status === "In Review" || publication.status === "Preprint" ? "outline" : "default"}>
                   {publication.status}
                 </Badge>
               )}
             </div>
             
-            <p className="text-muted-foreground mb-4">
+            <p className="mb-4 text-muted-foreground">
               {publication.authors.split(", ").map((author, idx) => (
                 <span key={idx}>
-                  {author === "Usama, M." ? (
+                  {author === "Usama, M." || author === "Muhammad Usama" ? (
                     <span className="font-semibold text-accent">{author}</span>
                   ) : (
                     author
@@ -102,23 +104,27 @@ const PublicationDetail = () => {
                 src={
                   publication.teaserImage === "nurbgen-teaser"
                     ? nurbgenArchitecture
+                    : publication.teaserImage === "dreamcad-teaser"
+                    ? dreamCadTeaser
+                    : publication.teaserImage === "physics-in-loop-teaser"
+                    ? physicsInLoopTeaser
                     : publication.teaserImage === "marvel-teaser"
                     ? marvelTeaser
                     : publication.teaserImage
                 }
                 alt={`${publication.title} teaser`}
-                className="w-full rounded-lg border border-border object-contain"
+                className="w-full rounded-md border border-border object-contain"
               />
             </div>
           )}
 
           <div>
-            <h3 className="text-xl font-semibold text-primary mb-4">Key Contributions</h3>
+            <h3 className="mb-4 text-xl font-semibold text-foreground">Key Contributions</h3>
             <ul className="space-y-2">
               {publication.contributions.map((contribution, index) => (
                 <li key={index} className="flex gap-3">
                   <span className="text-accent mt-1">•</span>
-                  <span className="text-card-foreground">{contribution}</span>
+                  <span className="text-muted-foreground">{contribution}</span>
                 </li>
               ))}
             </ul>
@@ -126,8 +132,8 @@ const PublicationDetail = () => {
 
           {publication.abstract && (
             <div className="mt-8">
-              <h3 className="text-xl font-semibold text-primary mb-4">Abstract</h3>
-              <p className="text-card-foreground leading-relaxed">
+              <h3 className="mb-4 text-xl font-semibold text-foreground">Abstract</h3>
+              <p className="leading-relaxed text-muted-foreground">
                 {publication.abstract}
               </p>
             </div>
@@ -135,8 +141,8 @@ const PublicationDetail = () => {
 
           {publication.methodology && (
             <div className="mt-8">
-              <h3 className="text-xl font-semibold text-primary mb-4">Methodology</h3>
-              <p className="text-card-foreground leading-relaxed">
+              <h3 className="mb-4 text-xl font-semibold text-foreground">Methodology</h3>
+              <p className="leading-relaxed text-muted-foreground">
                 {publication.methodology}
               </p>
             </div>
@@ -144,8 +150,8 @@ const PublicationDetail = () => {
 
           {publication.results && (
             <div className="mt-8">
-              <h3 className="text-xl font-semibold text-primary mb-4">Results</h3>
-              <p className="text-card-foreground leading-relaxed mb-6">
+              <h3 className="mb-4 text-xl font-semibold text-foreground">Results</h3>
+              <p className="mb-6 leading-relaxed text-muted-foreground">
                 {publication.results}
               </p>
               

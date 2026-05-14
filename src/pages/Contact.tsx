@@ -47,8 +47,8 @@ const Contact = () => {
         subtitle="Let's connect and collaborate"
       >
         <div className="max-w-2xl mx-auto">
-          <Card className="p-8 mb-8">
-            <p className="text-card-foreground leading-relaxed mb-6">
+          <Card className="hairline-card mb-8 p-6 md:p-8">
+            <p className="mb-6 leading-relaxed text-muted-foreground">
               I'm always interested in discussing research opportunities, collaborations, 
               or simply connecting with fellow researchers and professionals. Feel free to 
               reach out through any of the following channels:
@@ -61,13 +61,13 @@ const Contact = () => {
                   href={method.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 rounded-lg border border-border hover:border-accent hover:bg-accent/5 transition-all group"
+                  className="group flex items-center gap-4 rounded-md border border-border/80 p-4 transition-all hover:border-accent hover:bg-accent/5"
                 >
-                  <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-md bg-accent/10 transition-colors group-hover:bg-accent/20">
                     <method.icon className="w-5 h-5 text-accent" />
                   </div>
                   <div>
-                    <p className="font-medium text-primary">{method.label}</p>
+                    <p className="font-medium text-foreground">{method.label}</p>
                     <p className="text-sm text-muted-foreground">{method.value}</p>
                   </div>
                 </a>

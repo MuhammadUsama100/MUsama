@@ -28,20 +28,20 @@ const Education = () => {
         title="Education"
         subtitle="My academic background and qualifications"
       >
-        <div className="space-y-8">
+        <div className="space-y-5">
           {education.map((edu, index) => (
-            <Card key={index} className="p-6">
+            <Card key={index} className="hairline-card p-5 md:p-6">
               <div className="flex gap-4">
                 <div className="flex-shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-md bg-accent/10">
                     <GraduationCap className="w-6 h-6 text-accent" />
                   </div>
                 </div>
                 
-                <div className="flex-1">
-                  <div className="flex justify-between items-start mb-2">
+                <div className="flex-1 min-w-0">
+                  <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                     <div>
-                      <h3 className="text-xl font-semibold text-primary">
+                      <h3 className="text-xl font-semibold leading-snug text-foreground">
                         {edu.degree}
                       </h3>
                       <p className="text-accent font-medium">
@@ -51,12 +51,12 @@ const Education = () => {
                         {edu.location}
                       </p>
                     </div>
-                    <span className="text-sm text-muted-foreground whitespace-nowrap">
+                    <span className="text-sm font-medium text-muted-foreground whitespace-nowrap">
                       {edu.period}
                     </span>
                   </div>
                   
-                  <p className="text-card-foreground leading-relaxed mb-2">
+                  <p className="mb-2 leading-relaxed text-muted-foreground">
                     {edu.description}
                   </p>
                   
