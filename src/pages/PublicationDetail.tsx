@@ -5,11 +5,9 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { ArrowLeft, FileText, Globe, Code } from "lucide-react";
-import nurbgenArchitecture from "@/assets/nurbgen-architecture.png";
-import marvelTeaser from "@/assets/marvel-teaser.png";
-import dreamCadTeaser from "@/assets/DreamCad.png";
-import physicsInLoopTeaser from "@/assets/Physics_in_loop.png";
+import { ArrowLeft } from "lucide-react";
+import PublicationFigureCarousel from "@/components/PublicationFigureCarousel";
+import PublicationActions from "@/components/PublicationActions";
 
 const PublicationDetail = () => {
   const { id } = useParams();
@@ -70,53 +68,19 @@ const PublicationDetail = () => {
               ))}
             </p>
 
-            <div className="flex gap-3 mb-6">
-              {publication.links.projectPage && (
-                <Button asChild variant="default">
-                  <a href={publication.links.projectPage} target="_blank" rel="noopener noreferrer">
-                    <Globe className="w-4 h-4 mr-2" />
-                    Project Page
-                  </a>
-                </Button>
-              )}
-              {publication.links.paper && (
-                <Button asChild variant="outline">
-                  <a href={publication.links.paper} target="_blank" rel="noopener noreferrer">
-                    <FileText className="w-4 h-4 mr-2" />
-                    Paper
-                  </a>
-                </Button>
-              )}
-              {publication.links.code && (
-                <Button asChild variant="outline">
-                  <a href={publication.links.code} target="_blank" rel="noopener noreferrer">
-                    <Code className="w-4 h-4 mr-2" />
-                    Code
-                  </a>
-                </Button>
-              )}
+            <div className="mb-6">
+              <PublicationActions
+                publication={publication}
+                featuredProject={Boolean(publication.links.projectPage)}
+              />
             </div>
           </div>
 
-          {publication.teaserImage && (
-            <div className="mb-6">
-              <img
-                src={
-                  publication.teaserImage === "nurbgen-teaser"
-                    ? nurbgenArchitecture
-                    : publication.teaserImage === "dreamcad-teaser"
-                    ? dreamCadTeaser
-                    : publication.teaserImage === "physics-in-loop-teaser"
-                    ? physicsInLoopTeaser
-                    : publication.teaserImage === "marvel-teaser"
-                    ? marvelTeaser
-                    : publication.teaserImage
-                }
-                alt={`${publication.title} teaser`}
-                className="w-full rounded-md border border-border object-contain"
-              />
-            </div>
-          )}
+          <PublicationFigureCarousel
+            publicationId={publication.id}
+            title={publication.title}
+            className="mb-8 overflow-hidden rounded-md border border-border"
+          />
 
           <div>
             <h3 className="mb-4 text-xl font-semibold text-foreground">Key Contributions</h3>

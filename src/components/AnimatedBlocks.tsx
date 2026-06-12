@@ -4,7 +4,7 @@ const AnimatedBlocks = () => {
       <svg
         className="h-full w-full opacity-75"
         viewBox="0 0 1200 640"
-        preserveAspectRatio="none"
+        preserveAspectRatio="xMidYMid slice"
         aria-hidden="true"
       >
         <defs>

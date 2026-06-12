@@ -3,16 +3,12 @@ import { useNavigate } from "react-router-dom";
 import PageSection from "@/components/PageSection";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { Search, FileText, Globe, Code } from "lucide-react";
+import { Search } from "lucide-react";
 import { publications } from "@/data/publications";
 import PublicationGraph from "@/components/PublicationGraph";
-import nurbgenArchitecture from "@/assets/nurbgen-architecture.png";
-import marvelTeaser from "@/assets/marvel-teaser.png";
-import dreamCadTeaser from "@/assets/DreamCad.png";
-import physicsInLoopTeaser from "@/assets/Physics_in_loop.png";
+import PublicationFigureCarousel from "@/components/PublicationFigureCarousel";
+import PublicationActions from "@/components/PublicationActions";
 
 const Publications = () => {
   const navigate = useNavigate();
@@ -85,8 +81,8 @@ const Publications = () => {
                 className="hairline-card cursor-pointer overflow-hidden transition-colors hover:border-accent/60"
                 onClick={() => navigate(`/publications/${publication.id}`)}
               >
-                <div className="grid gap-0 md:grid-cols-[1fr,18rem]">
-                  <div className="min-w-0 p-5 md:p-6">
+                <div className="grid gap-0 md:grid-cols-[minmax(20rem,34%)_minmax(0,1fr)]">
+                  <div className="order-2 min-w-0 p-5 md:p-6">
                     <div className="mb-3 flex flex-wrap items-center gap-2">
                       <Badge variant="secondary" className="rounded-md">{publication.venue}</Badge>
                       {publication.status && (
@@ -119,87 +115,19 @@ const Publications = () => {
                       </ul>
                     </div>
 
-                    <TooltipProvider>
-                      <div className="flex flex-wrap gap-2 md:gap-3">
-                        {publication.links.projectPage ? (
-                          <Button asChild variant="outline" size="sm" className="rounded-md" onClick={(e) => e.stopPropagation()}>
-                            <a href={publication.links.projectPage} target="_blank" rel="noopener noreferrer">
-                              <Globe className="w-4 h-4 mr-2" />
-                              Project Page
-                            </a>
-                          </Button>
-                        ) : (
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button variant="outline" size="sm" className="rounded-md" disabled onClick={(e) => e.stopPropagation()}>
-                                <Globe className="w-4 h-4 mr-2" />
-                                Project Page
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent><p>Upcoming</p></TooltipContent>
-                          </Tooltip>
-                        )}
-
-                        {publication.links.paper ? (
-                          <Button asChild variant="outline" size="sm" className="rounded-md" onClick={(e) => e.stopPropagation()}>
-                            <a href={publication.links.paper} target="_blank" rel="noopener noreferrer">
-                              <FileText className="w-4 h-4 mr-2" />
-                              Paper
-                            </a>
-                          </Button>
-                        ) : (
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button variant="outline" size="sm" className="rounded-md" disabled onClick={(e) => e.stopPropagation()}>
-                                <FileText className="w-4 h-4 mr-2" />
-                                Paper
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent><p>Upcoming</p></TooltipContent>
-                          </Tooltip>
-                        )}
-
-                        {publication.links.code ? (
-                          <Button asChild variant="outline" size="sm" className="rounded-md" onClick={(e) => e.stopPropagation()}>
-                            <a href={publication.links.code} target="_blank" rel="noopener noreferrer">
-                              <Code className="w-4 h-4 mr-2" />
-                              Code
-                            </a>
-                          </Button>
-                        ) : (
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button variant="outline" size="sm" className="rounded-md" disabled onClick={(e) => e.stopPropagation()}>
-                                <Code className="w-4 h-4 mr-2" />
-                                Code
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent><p>Upcoming</p></TooltipContent>
-                          </Tooltip>
-                        )}
-                      </div>
-                    </TooltipProvider>
+                    <PublicationActions publication={publication} compact />
                   </div>
 
-                  {publication.teaserImage && (
-                    <div className="flex min-h-56 items-center justify-center border-t border-border bg-muted/40 p-4 md:border-l md:border-t-0">
-                      <img
-                        src={
-                          publication.teaserImage === "nurbgen-teaser"
-                            ? nurbgenArchitecture
-                            : publication.teaserImage === "dreamcad-teaser"
-                            ? dreamCadTeaser
-                            : publication.teaserImage === "physics-in-loop-teaser"
-                            ? physicsInLoopTeaser
-                            : publication.teaserImage === "marvel-teaser"
-                            ? marvelTeaser
-                            : publication.teaserImage
-                        }
-                        alt={`${publication.title} preview`}
-                        className="max-h-56 w-full rounded-md object-contain"
-                      />
-                    </div>
-                  )}
+                  <div
+                    className="order-1 flex min-w-0 items-center border-b border-border bg-muted/40 py-4 md:border-b-0 md:border-r"
+                    onClick={(event) => event.stopPropagation()}
+                  >
+                    <PublicationFigureCarousel
+                      publicationId={publication.id}
+                      title={publication.title}
+                      compact
+                    />
+                  </div>
                 </div>
               </Card>
             ))

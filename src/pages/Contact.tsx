@@ -77,7 +77,7 @@ const Contact = () => {
 
           <div className="text-center">
             <p className="text-muted-foreground">
-              Based in <span className="font-medium text-foreground">Kaiserslautern, Germany</span>
+              Based in <span className="font-medium text-foreground">Kaiserslautern, Rhineland-Palatinate, Germany</span>
             </p>
             <p className="text-sm text-muted-foreground mt-1">
               Gerhart-Hauptmann-Str. 24, 67663 Kaiserslautern

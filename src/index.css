@@ -230,3 +230,139 @@ All colors MUST be HSL.
 .hairline-card {
   @apply border border-border/80 bg-card/85 shadow-sm backdrop-blur;
 }
+
+/* Publication figure slideshow, inspired by the referenced research carousel. */
+.publication-figure {
+  isolation: isolate;
+  background:
+    linear-gradient(140deg, hsl(var(--accent) / 0.08), hsl(var(--muted) / 0.35)),
+    white;
+}
+
+.publication-figure-stage {
+  position: absolute;
+  inset: 0 0 3.5rem;
+}
+
+.publication-figure-slide {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  padding: 0.85rem;
+  object-fit: contain;
+  object-position: center;
+  opacity: 0;
+  pointer-events: none;
+  clip-path: inset(0 0 100% 0);
+  transform: scale(1.012);
+  filter: saturate(0.96) brightness(1.01);
+  transition:
+    clip-path 720ms cubic-bezier(0.65, 0, 0.35, 1),
+    opacity 220ms ease,
+    transform 720ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.publication-figure-slide.is-active {
+  z-index: 2;
+  opacity: 1;
+  clip-path: inset(0);
+  transform: scale(1);
+}
+
+.publication-figure-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  background-image:
+    linear-gradient(90deg, rgb(103 232 249 / 0.08) 1px, transparent 1px),
+    linear-gradient(0deg, rgb(103 232 249 / 0.08) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.publication-figure-stage::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  height: 2px;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(90deg, transparent, rgb(103 232 249 / 0.95), transparent);
+  box-shadow: 0 0 14px rgb(103 232 249 / 0.75), 0 0 36px rgb(103 232 249 / 0.35);
+}
+
+.publication-figure-stage.is-transitioning::before {
+  animation: publication-grid-flash 720ms ease-out;
+}
+
+.publication-figure-stage.is-transitioning::after {
+  animation: publication-scanline 720ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.publication-figure-nav {
+  @apply absolute top-1/2 z-20 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-lg border border-white/20 bg-slate-950/60 text-white opacity-0 shadow-lg backdrop-blur-md transition;
+  pointer-events: none;
+}
+
+.publication-figure:hover .publication-figure-nav,
+.publication-figure:focus-within .publication-figure-nav {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.publication-figure-nav:hover {
+  @apply scale-105 border-cyan-300/50 bg-slate-950/85 text-cyan-200;
+}
+
+.publication-figure-dots {
+  @apply absolute bottom-[4.25rem] left-1/2 z-20 flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-slate-950/55 px-2.5 py-2 opacity-0 backdrop-blur-md transition-opacity;
+}
+
+.publication-figure:hover .publication-figure-dots,
+.publication-figure:focus-within .publication-figure-dots {
+  opacity: 1;
+}
+
+.publication-figure-dot {
+  @apply h-1.5 w-1.5 rounded-full border-0 bg-white/55 p-0 transition-all;
+}
+
+.publication-figure-dot.is-active {
+  @apply w-5 bg-gradient-to-r from-sky-400 to-teal-300;
+}
+
+.publication-figure-caption {
+  @apply absolute inset-x-0 bottom-0 z-10 flex min-h-14 items-center justify-center border-t border-border/80 bg-card/95 px-3 py-2 text-center text-xs leading-relaxed text-muted-foreground backdrop-blur;
+}
+
+@keyframes publication-grid-flash {
+  0%, 100% { opacity: 0; }
+  20% { opacity: 1; }
+  75% { opacity: 0.55; }
+}
+
+@keyframes publication-scanline {
+  0% { top: -2px; opacity: 0; }
+  12%, 88% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .publication-figure-slide {
+    clip-path: none;
+    transform: none;
+    transition: opacity 160ms ease;
+  }
+
+  .publication-figure-stage::before,
+  .publication-figure-stage::after {
+    animation: none !important;
+  }
+}

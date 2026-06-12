@@ -3,6 +3,7 @@ import { publications } from "@/data/publications";
 import { Card } from "@/components/ui/card";
 
 const getShortTitle = (title: string) => {
+  if (title.startsWith("BRepCLIP")) return "BRepCLIP";
   if (title.startsWith("DreamCAD")) return "DreamCAD";
   if (title.startsWith("Physics-in-the-Loop")) return "Physics-in-the-Loop";
   if (title.startsWith("NURBGen")) return "NURBGen";
@@ -60,12 +61,18 @@ const PublicationGraph = () => {
             return (
               <section key={domain.title} className={`rounded-lg border p-3 ${styles.section}`}>
                 <h3 className={`text-sm font-semibold ${styles.title}`}>{domain.title}</h3>
-                <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-stretch">
-                  {domain.papers.map((paper, index) => (
-                    <div key={paper.id} className="flex min-w-0 flex-1 items-center gap-2">
-                      {index > 0 && (
-                        <span className={`hidden h-px w-5 shrink-0 sm:block ${styles.line}`} aria-hidden="true" />
-                      )}
+                <div
+                  className={`mt-3 grid gap-2 ${
+                    domain.title === "CAD Generation"
+                      ? "sm:grid-cols-2 xl:grid-cols-4"
+                      : "sm:grid-cols-1"
+                  }`}
+                >
+                  {domain.papers.map((paper) => (
+                    <div
+                      key={paper.id}
+                      className="flex min-w-0 items-center gap-2"
+                    >
                       <Link
                         to={`/publications/${paper.id}`}
                         className={`block min-h-20 min-w-0 flex-1 rounded-md border px-3 py-2 transition-colors ${styles.node}`}

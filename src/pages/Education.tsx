@@ -6,7 +6,7 @@ const education = [
   {
     degree: "Master of Science in Computer Science",
     institution: "Technische Universität Kaiserslautern-Landau (RPTU)",
-    location: "Kaiserslautern, Germany",
+    location: "Kaiserslautern, Rhineland-Palatinate, Germany",
     period: "Oct 2023 - Present",
     description: "Master's Thesis (in progress): Exploring novel approaches in multimodal 3D Retrieval Framework (targeting submission to ECCV 2026). Focus on multimodal generation, parametric shape reconstruction, and 3D understanding.",
     gpa: "",
@@ -14,7 +14,7 @@ const education = [
   {
     degree: "Bachelor of Science in Computer Science",
     institution: "National University of Computer and Emerging Sciences (NUCES-FAST)",
-    location: "Karachi, Pakistan",
+    location: "Karachi, Sindh, Pakistan",
     period: "Aug 2018 - Jul 2022",
     description: "Comprehensive computer science education with strong foundation in software engineering, algorithms, and machine learning. Developed practical skills in full-stack development and deployment automation.",
     gpa: "",

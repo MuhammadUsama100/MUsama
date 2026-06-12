@@ -39,7 +39,7 @@ const About = () => {
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-background">
       <section className="relative border-b border-border/80 py-12 md:py-20">
-        <div className="absolute inset-0 z-0 opacity-35">
+        <div className="absolute inset-x-0 top-0 z-0 h-[30rem] opacity-35 md:inset-0 md:h-auto">
           <AnimatedBlocks />
         </div>
 
@@ -61,7 +61,7 @@ const About = () => {
               <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
                 <span className="inline-flex items-center gap-2">
                   <MapPin className="h-4 w-4 text-accent" />
-                  Kaiserslautern, Germany
+                  Kaiserslautern, Rhineland-Palatinate, Germany
                 </span>
                 <span className="inline-flex items-center gap-2">
                   <GraduationCap className="h-4 w-4 text-accent" />
@@ -143,7 +143,7 @@ const About = () => {
               </div>
 
               <div className="space-y-4">
-                {publications.map((publication) => (
+                {publications.slice(0, 3).map((publication) => (
                   <Card key={publication.id} className="hairline-card p-5 transition-colors hover:border-accent/50">
                     <div className="grid gap-4 sm:grid-cols-[1fr,4.5rem]">
                       <div>

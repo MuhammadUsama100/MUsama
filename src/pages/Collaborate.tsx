@@ -13,7 +13,6 @@ const collaborations = [
     logo: noahsArkLogo,
     organization: "Huawei Noah's Ark Lab",
     type: "Research Publication Collaboration",
-    status: "In Progress",
     collaborator: "Muhammad Sadil Khan",
     collaboratorRole: "Senior PhD Student at RPTU Kaiserslautern and Intern at Huawei Noah's Ark Lab, London",
     summary:
@@ -25,7 +24,7 @@ const collaborations = [
     logo: manLogo,
     organization: "MAN Truck & Bus SE",
     type: "Research Publication Collaboration",
-    status: "Accepted at IJCAI-ECAI 2026 AI4Tech",
+    status: "Published at IJCAI-ECAI 2026 AI4Tech",
     collaborator: "Elias Berger",
     collaboratorRole: "AI Research Scientist at MAN Truck & Bus SE and PhD Student at Technische Universitat Dresden",
     summary:
@@ -92,9 +91,11 @@ const Collaborate = () => {
                       <Badge variant="secondary" className="rounded-md">
                         {collaboration.type}
                       </Badge>
-                      <Badge variant={collaboration.status.includes("Accepted") ? "default" : "outline"} className="rounded-md">
-                        {collaboration.status}
-                      </Badge>
+                      {"status" in collaboration && (
+                        <Badge variant="default" className="rounded-md">
+                          {collaboration.status}
+                        </Badge>
+                      )}
                     </div>
                     <h3 className="text-2xl font-semibold tracking-tight text-foreground">
                       {collaboration.title}
