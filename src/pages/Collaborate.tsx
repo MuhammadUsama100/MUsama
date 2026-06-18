@@ -13,6 +13,7 @@ const collaborations = [
     logo: noahsArkLogo,
     organization: "Huawei Noah's Ark Lab",
     type: "Research Publication Collaboration",
+    status: "Published at ECCV 2026",
     collaborator: "Muhammad Sadil Khan",
     collaboratorRole: "Senior PhD Student at RPTU Kaiserslautern and Intern at Huawei Noah's Ark Lab, London",
     summary:
@@ -87,7 +88,7 @@ const Collaborate = () => {
                       />
                     </div>
                     <div className="min-w-0">
-                    <div className="mb-3 flex flex-wrap items-center gap-2">
+                    <div className="mb-3 flex flex-col items-start gap-2">
                       <Badge variant="secondary" className="rounded-md">
                         {collaboration.type}
                       </Badge>

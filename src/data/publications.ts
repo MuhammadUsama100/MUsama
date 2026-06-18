@@ -84,9 +84,9 @@ const publicationItems: Publication[] = [
     id: "dreamcad",
     title: "DreamCAD: Scaling Multi-modal CAD Generation using Differentiable Parametric Surfaces",
     authors: "Muhammad Sadil Khan, Muhammad Usama, Rolandos Alexandros Potamias, Didier Stricker, Muhammad Zeshan Afzal, Jiankang Deng, Ismail Elezi",
-    venue: "arXiv 2026",
+    venue: "ECCV 2026",
     year: 2026,
-    status: "Preprint",
+    status: "Published",
     contributions: [
       "Introduced DreamCAD, a multimodal framework for editable CAD generation from text, images, and point clouds.",
       "Represented shapes as C0-continuous rational Bezier patches with differentiable tessellation for scalable point-level supervision.",
@@ -96,11 +96,11 @@ const publicationItems: Publication[] = [
     abstract: "DreamCAD addresses the scalability challenge in multimodal CAD generation by moving away from small design-history datasets and non-differentiable BRep topology. It represents shapes as C0-continuous rational Bezier patches that can be differentiably tessellated, allowing training from large-scale unannotated 3D meshes using point-level supervision. The generated surfaces are exportable as STEP files and editable in standard CAD software.",
     methodology: "DreamCAD uses a sparse voxel representation enriched with visual and geometric features to learn structured 3D latents. An initial parametric surface is created by removing internal voxel quads through flood fill and converting the exposed quads into bicubic rational Bezier patches. A parametric decoder then refines control points and weights while preserving shared boundaries for C0 continuity. Conditional generation follows a coarse-to-fine flow-matching pipeline for image and point inputs, while text-to-CAD uses a text-to-image stage followed by image-to-CAD generation.",
     results: "DreamCAD achieves state-of-the-art performance across point-, image-, and text-conditioned CAD generation on ABC and Objaverse. It reduces Chamfer Distance by up to 70% in point-to-CAD, reaches zero invalidity ratio in reported settings, and surpasses 75% preference in expert and GPT-based evaluations for text and image-to-CAD. The work also demonstrates topology recovery from DreamCAD outputs, suggesting a path toward production-ready CAD generation.",
-    bibtex: `@article{khan2026dreamcad,
-  title   = {DreamCAD: Scaling Multi-modal CAD Generation using Differentiable Parametric Surfaces},
-  author  = {Khan, Mohammad Sadil and Usama, Muhammad and Potamias, Rolandos Alexandros and Stricker, Didier and Afzal, Muhammad Zeshan and Deng, Jiankang and Elezi, Ismail},
-  journal = {arXiv preprint arXiv:2603.05607},
-  year    = {2026}
+    bibtex: `@inproceedings{khan2026dreamcad,
+  title     = {DreamCAD: Scaling Multi-modal CAD Generation using Differentiable Parametric Surfaces},
+  author    = {Khan, Mohammad Sadil and Usama, Muhammad and Potamias, Rolandos Alexandros and Stricker, Didier and Afzal, Muhammad Zeshan and Deng, Jiankang and Elezi, Ismail},
+  booktitle = {Proceedings of the European Conference on Computer Vision},
+  year      = {2026}
 }`,
     links: {
       projectPage: "https://sadilkhan.github.io/dreamcad2026/",
