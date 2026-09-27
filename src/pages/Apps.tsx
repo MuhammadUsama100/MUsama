@@ -2,19 +2,32 @@ import PageSection from "@/components/PageSection";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ExternalLink, Rocket } from "lucide-react";
+import { ExternalLink, MonitorPlay, Rocket } from "lucide-react";
 import launchPadImage from "@/assets/LaunchPad.png";
+import hololensBrainImage from "@/assets/hololens-brain-visualization.png";
 
 interface AppItem {
   title: string;
   status: string;
+  role?: string;
   description: string;
   tags: string[];
   image: string;
-  url: string;
+  url?: string;
+  demoComingSoon?: boolean;
 }
 
 const apps: AppItem[] = [
+  {
+    title: "HoloLens 2 Human Brain Visualization",
+    status: "In Development",
+    role: "Project Lead / Team Manager",
+    description:
+      "Leading and coordinating the development team for a HoloLens 2 application that brings segmented brain and skull models into an immersive mixed-reality environment. The application supports high-performance 3D model loading, accurate spatial placement, hand-tracked rotation and scaling, anatomical layer controls, structure highlighting, and an OpenXR-based deployment workflow.",
+    tags: ["HoloLens 2", "Mixed Reality", "Team Leadership", "OpenXR", "3D Visualization", "Hand Tracking", "Medical Imaging"],
+    image: hololensBrainImage,
+    demoComingSoon: true,
+  },
   {
     title: "LaunchPad",
     status: "Beta Version",
@@ -54,6 +67,11 @@ const Apps = () => {
                       <h3 className="text-xl font-semibold leading-snug text-foreground md:text-2xl">
                         {app.title}
                       </h3>
+                      {app.role && (
+                        <p className="mt-1 text-sm font-medium text-accent">
+                          {app.role}
+                        </p>
+                      )}
                     </div>
                     <div className="flex h-10 w-10 items-center justify-center rounded-md bg-accent/10 text-accent">
                       <Rocket className="h-5 w-5" />
@@ -72,12 +90,21 @@ const Apps = () => {
                     ))}
                   </div>
 
-                  <Button asChild variant="outline" size="sm" className="gap-2">
-                    <a href={app.url} target="_blank" rel="noreferrer">
-                      <ExternalLink className="h-4 w-4" />
-                      Open App
-                    </a>
-                  </Button>
+                  {app.url && (
+                    <Button asChild variant="outline" size="sm" className="gap-2">
+                      <a href={app.url} target="_blank" rel="noreferrer">
+                        <ExternalLink className="h-4 w-4 text-cyan-700 dark:text-cyan-300" />
+                        Open App
+                      </a>
+                    </Button>
+                  )}
+
+                  {app.demoComingSoon && (
+                    <Button variant="outline" size="sm" disabled className="gap-2">
+                      <MonitorPlay className="h-4 w-4 text-cyan-700 dark:text-cyan-300" />
+                      Demo Available Soon
+                    </Button>
+                  )}
                 </div>
               </div>
             </Card>

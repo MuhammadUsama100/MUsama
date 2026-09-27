@@ -207,6 +207,9 @@ const About = () => {
                   <p>
                     I combine research practice with three years of software engineering experience across distributed training, CI/CD, infrastructure, and production systems.
                   </p>
+                  <p>
+                    I also serve as a reviewer for NeurIPS 2026 and AAAI 2025.
+                  </p>
                 </div>
               </Card>
             </div>

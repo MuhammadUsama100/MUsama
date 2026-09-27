@@ -12,22 +12,40 @@ const getShortTitle = (title: string) => {
 };
 
 const getDomain = (id: string) =>
-  id === "marvel-40m" ? "3D Content Generation" : "CAD Generation";
+  id === "marvel-40m"
+    ? "3D Content Generation"
+    : id === "brepclip"
+      ? "3D Understanding"
+      : "CAD Generation";
 
 const domains = [
   {
     title: "3D Content Generation",
     papers: publications.filter((paper) => getDomain(paper.id) === "3D Content Generation"),
     color: "teal",
+    className: "lg:col-span-1",
+  },
+  {
+    title: "3D Understanding",
+    papers: publications.filter((paper) => getDomain(paper.id) === "3D Understanding"),
+    color: "amber",
+    className: "lg:col-span-1",
   },
   {
     title: "CAD Generation",
     papers: publications.filter((paper) => getDomain(paper.id) === "CAD Generation"),
     color: "sky",
+    className: "lg:col-span-2",
   },
 ];
 
 const colors = {
+  amber: {
+    section: "border-amber-500/40 bg-amber-500/5 dark:bg-amber-500/10",
+    title: "text-amber-700 dark:text-amber-300",
+    node: "border-amber-500/40 bg-white/80 hover:bg-amber-50 dark:bg-slate-900/70 dark:hover:bg-amber-500/15",
+    line: "bg-amber-500/35",
+  },
   teal: {
     section: "border-teal-500/40 bg-teal-500/5 dark:bg-teal-500/10",
     title: "text-teal-700 dark:text-teal-300",
@@ -54,17 +72,17 @@ const PublicationGraph = () => {
       </div>
 
       <div className="bg-muted/30 p-3 dark:bg-slate-950/70">
-        <div className="grid gap-3 lg:grid-cols-[0.85fr,1.55fr]">
+        <div className="grid gap-3 lg:grid-cols-2">
           {domains.map((domain) => {
             const styles = colors[domain.color as keyof typeof colors];
 
             return (
-              <section key={domain.title} className={`rounded-lg border p-3 ${styles.section}`}>
+              <section key={domain.title} className={`rounded-lg border p-3 ${domain.className} ${styles.section}`}>
                 <h3 className={`text-sm font-semibold ${styles.title}`}>{domain.title}</h3>
                 <div
                   className={`mt-3 grid gap-2 ${
                     domain.title === "CAD Generation"
-                      ? "sm:grid-cols-2 xl:grid-cols-4"
+                      ? "sm:grid-cols-2 xl:grid-cols-3"
                       : "sm:grid-cols-1"
                   }`}
                 >

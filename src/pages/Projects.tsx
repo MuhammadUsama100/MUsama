@@ -2,7 +2,7 @@ import PageSection from "@/components/PageSection";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, FileText } from "lucide-react";
+import { Database, FileText, Github, Globe2, Presentation } from "lucide-react";
 import covidTrackerImage from "@/assets/covid-tracker-app.png";
 import doublerocker from "@/assets/maxresdefault.png";
 import llmFinetuningImage from "@/assets/finetune.png";
@@ -25,7 +25,6 @@ interface Project {
 }
 
 const projects: Project[] = [
-    // --- NEW PROJECT ADDED HERE ---
   {
     title: "Generative Design of a Double-Rocker Mechanism",
     role: "Research Pre-Study / Generative AI Developer",
@@ -153,7 +152,7 @@ const Projects = () => {
                         onClick={() => window.open(project.githubUrl, '_blank')}
                         className="gap-2"
                       >
-                        <ExternalLink className="w-4 h-4" />
+                        <Github className="h-4 w-4 text-foreground" />
                         View on GitHub
                       </Button>
                     )}
@@ -165,7 +164,7 @@ const Projects = () => {
                         onClick={() => window.open(project.dataset, '_blank')}
                         className="gap-2"
                       >
-                        <ExternalLink className="w-4 h-4" />
+                        <Database className="h-4 w-4 text-emerald-700 dark:text-emerald-300" />
                         View Dataset
                       </Button>
                     )}
@@ -177,7 +176,7 @@ const Projects = () => {
                         onClick={() => window.open(project.projectUrl, '_blank')}
                         className="gap-2"
                       >
-                        <ExternalLink className="w-4 h-4" />
+                        <Globe2 className="h-4 w-4 text-cyan-700 dark:text-cyan-300" />
                         Project Site
                       </Button>
                     )}
@@ -189,7 +188,7 @@ const Projects = () => {
                         disabled
                         className="gap-2"
                       >
-                        <FileText className="w-4 h-4" />
+                        <FileText className="h-4 w-4 text-blue-700 dark:text-blue-300" />
                         PDF Coming Soon
                       </Button>
                     )}
@@ -201,7 +200,7 @@ const Projects = () => {
                         disabled
                         className="gap-2"
                       >
-                        <FileText className="w-4 h-4" />
+                        <Presentation className="h-4 w-4 text-violet-700 dark:text-violet-300" />
                         PPT Coming Soon
                       </Button>
                     )}
@@ -213,10 +212,11 @@ const Projects = () => {
                         disabled
                         className="gap-2"
                       >
-                        <FileText className="w-4 h-4" />
+                        <FileText className="h-4 w-4 text-amber-700 dark:text-amber-300" />
                         Report Coming Soon
                       </Button>
                     )}
+
                     </div>
                   </div>
                 </div>

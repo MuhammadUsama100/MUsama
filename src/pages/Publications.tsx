@@ -17,6 +17,11 @@ const Publications = () => {
   const filteredPublications = publications.filter((pub) =>
     pub.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
+  const publishedVenueCount = new Set(
+    publications
+      .filter((publication) => publication.status === "Published")
+      .map((publication) => publication.venue)
+  ).size;
 
   const highlightName = (text: string) => {
     const parts = text.split(/(Usama, M\.|Muhammad Usama)/g);
@@ -49,18 +54,14 @@ const Publications = () => {
                 className="pl-10"
               />
             </div>
-            <div className="grid gap-2 sm:grid-cols-3 lg:w-[26rem]">
+            <div className="grid gap-2 sm:grid-cols-2 lg:w-[18rem]">
               <Card className="hairline-card p-3">
                 <p className="text-xl font-semibold text-foreground">{publications.length}</p>
                 <p className="mt-0.5 text-xs text-muted-foreground">Total</p>
               </Card>
               <Card className="hairline-card p-3">
-                <p className="text-xl font-semibold text-foreground">1</p>
-                <p className="mt-0.5 text-xs text-muted-foreground">3D content</p>
-              </Card>
-              <Card className="hairline-card p-3">
-                <p className="text-xl font-semibold text-foreground">{publications.length - 1}</p>
-                <p className="mt-0.5 text-xs text-muted-foreground">CAD</p>
+                <p className="text-xl font-semibold text-foreground">{publishedVenueCount}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">Venues</p>
               </Card>
             </div>
           </div>

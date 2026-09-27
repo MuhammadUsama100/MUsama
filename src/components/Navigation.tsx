@@ -44,8 +44,8 @@ const Navigation = () => {
     <nav className="sticky top-0 z-50 w-full border-b border-border/80 bg-background/92 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80">
       <div className="container flex h-16 max-w-6xl items-center justify-between px-4">
         <Link to="/" className="group flex items-center gap-3" onClick={() => setIsMenuOpen(false)}>
-          <span className="flex h-9 w-9 items-center justify-center rounded-md bg-primary text-sm font-bold text-primary-foreground transition-colors group-hover:bg-accent">
-            MU
+          <span className="flex h-9 min-w-12 items-center justify-center rounded-full bg-primary px-2 text-sm font-bold text-primary-foreground transition-colors group-hover:bg-accent">
+            Hi 👋
           </span>
           <span className="hidden leading-tight sm:block">
             <span className="block text-sm font-semibold text-foreground">Muhammad Usama</span>

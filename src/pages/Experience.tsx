@@ -5,6 +5,8 @@ import dfkiLogo from "@/assets/dfki.png";
 import retrocausalLogo from "@/assets/Retrocausal.png";
 import akdnLogo from "@/assets/AKDN.png";
 import triLogo from "@/assets/tri.svg";
+import neuripsLogo from "@/assets/neurips.svg";
+import aaaiLogo from "@/assets/aaai.svg";
 
 const experiences = [
   {
@@ -42,6 +44,21 @@ const experiences = [
     location: "Karachi, Sindh, Pakistan",
     description: "Developed scalable multi-module healthcare system for largest hospital network in Karachi and Nairobi subsidiaries. Led deployment automation initiative introducing Docker, Docker Compose, and GitHub Actions for CI/CD. Implemented full-stack solutions using .NET, NestJS, and Angular. Automated analytics reporting using Firebase functions and Google BigQuery.",
     tags: [".NET", "NestJS", "Angular", "Docker", "CI/CD", "Firebase", "Healthcare"],
+  },
+];
+
+const reviewingExperience = [
+  {
+    title: "NeurIPS 2026",
+    fullTitle: "Conference on Neural Information Processing Systems",
+    logo: neuripsLogo,
+    role: "Reviewer",
+  },
+  {
+    title: "AAAI 2025",
+    fullTitle: "AAAI Conference on Artificial Intelligence",
+    logo: aaaiLogo,
+    role: "Reviewer",
   },
 ];
 
@@ -97,6 +114,47 @@ const Experience = () => {
             </Card>
           ))}
         </div>
+
+        <section className="mt-12" aria-labelledby="conference-reviewing-heading">
+          <div className="mb-5">
+            <h2
+              id="conference-reviewing-heading"
+              className="text-2xl font-semibold text-foreground md:text-3xl"
+            >
+              Conference Reviewing
+            </h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Peer-review service for leading artificial intelligence conferences
+            </p>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2">
+            {reviewingExperience.map((conference) => (
+              <Card key={conference.title} className="hairline-card p-5 md:p-6">
+                <div className="flex items-center gap-4">
+                  <div className="flex h-16 w-28 shrink-0 items-center justify-center rounded-md border border-border/80 bg-white p-2">
+                    <img
+                      src={conference.logo}
+                      alt={`${conference.title} logo`}
+                      className="max-h-12 max-w-full object-contain"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="text-xl font-semibold leading-snug text-foreground">
+                      {conference.title}
+                    </h3>
+                    <p className="text-sm font-medium text-accent">
+                      {conference.role}
+                    </p>
+                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                      {conference.fullTitle}
+                    </p>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </section>
       </PageSection>
     </div>
   );
